@@ -10,11 +10,15 @@ paths:
       parameters:
         - name: topic
           in: path
-          description: The topic to subscribe to
+          description: The topic to subscribe to.
           required: true
           example: suppliers
           schema:
             type: string
+            enum:
+              - suppliers
+              - orders
+              - customers
       requestBody:
         description: The hooks push configuraiton
         content:

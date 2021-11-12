@@ -10,13 +10,17 @@ paths:
       parameters:
         - name: topic
           in: path
-          description: The topic to publish update events to
+          description: The topic to publish update events to.
           required: true
           example: suppliers
           schema:
             type: string
+            enum:
+              - suppliers
+              - orders
+              - customers
       requestBody:
-        description: The content to post to the event topic
+        description: The content to post to the event topic.
         content:
           application/json:
             schema:

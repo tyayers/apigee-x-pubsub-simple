@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Apigee X Pub/Sub Event Test Client</title>
+  </head>
+  <body>
+    <div id="eventList" style="width: 100%; text-align: center;"></div>
+
+    <script>
+      const events = new EventSource('/events');
+
+      events.onmessage = (event) => {
+        const parsedData = JSON.parse(event.data);
+        console.log(event.data);
+        
+        if (Array.isArray(parsedData)) {
+          for (i in parsedData) {
+            addEvent(parsedData[i]);
+          }
+        }
+        else {
+          addEvent(parsedData);
+        }
+
+      };
+
+      function addEvent(message) {
+        var eventList = document.getElementById("eventList");
+        const newDiv = document.createElement("div");
+        newDiv.innerHTML = JSON.stringify(message);
+
+        eventList.appendChild(newDiv);
+      }
+
+    </script>
+  </body>
+</html>
