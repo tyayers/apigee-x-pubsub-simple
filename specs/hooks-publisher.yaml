@@ -1,0 +1,68 @@
+openapi: '3.0.2'
+info:
+  title: Hooks Publisher API
+  version: '1.0'
+servers:
+  - url: https://api-dev.apigee-x.theapishop.com
+paths:
+  /hooks/{topic}:
+    post:
+      parameters:
+        - name: topic
+          in: path
+          description: The topic to publish update events to
+          required: true
+          example: suppliers
+          schema:
+            type: string
+      requestBody:
+        description: The content to post to the event topic
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      data:
+                        type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        data:
+                          type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fault:
+                    type: object
+                    properties:
+                      faultString:
+                        type: string
+                        description: The type of fault and further information on reason.
+                        example: 
+                      detail:
+                        type: object
+                        properties:
+                          errorcode:
+                            type: string
+                            description: Exact error code
+                            example: steps.oauth.v2.FailedToResolveAPIKey
+                        
