@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="PubSub Base">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>Set-Target</Name>
+            </Step>
+            <Step>
+                <Condition>(proxy.pathsuffix MatchesPath "/{topicId}/subs") and (request.verb = "POST")</Condition>
+                <Name>Set-Subscribe</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>AddSubscriptionId</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <Flows/>
+    <HTTPTargetConnection>
+        <Properties/>
+        <Authentication>
+            <GoogleAccessToken>
+                <Scopes>
+                    <Scope>https://www.googleapis.com/auth/cloud-platform</Scope>
+                </Scopes>
+                <LifetimeInSeconds>3600</LifetimeInSeconds>
+            </GoogleAccessToken>
+        </Authentication>
+        <URL>https://pubsub.googleapis.com/v1/projects/{project}/subscriptions/{subId}</URL>
+    </HTTPTargetConnection>
+</TargetEndpoint>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="Set-Variables">
+    <DisplayName>Set-Variables</DisplayName>
+    <Properties/>
+    <AssignVariable>
+        <Name>project</Name>
+        <Value>bap-emea-apigee-6</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>subId</Name>
+        <Template>{xeger('[a-z]{1}[0-9A-Za-z]{15}')}</Template>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>serviceAccountEmail</Name>
+        <Value/>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

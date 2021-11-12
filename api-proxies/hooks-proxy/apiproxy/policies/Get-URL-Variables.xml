@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables continueOnError="false" enabled="true" name="Get-URL-Variables">
+    <DisplayName>Get-URL-Variables</DisplayName>
+    <Properties/>
+    <URIPath>
+        <Pattern ignoreCase="true">/{topicId}</Pattern>
+        <Pattern ignoreCase="true">/{topicId}/subs</Pattern>
+        <Pattern ignoreCase="true">/{topicId}/subs/{subId}</Pattern>
+    </URIPath>
+</ExtractVariables>

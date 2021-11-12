@@ -5,6 +5,17 @@
   <body>
     <div id="eventList" style="width: 100%; text-align: center;"></div>
 
+    <style>
+      .list-item {
+        background: #25282C;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        font-family: sans-serif;
+        color: white;
+      }
+    </style>
     <script>
       const events = new EventSource('/events');
 
@@ -12,20 +23,18 @@
         const parsedData = JSON.parse(event.data);
         console.log(event.data);
         
-        if (Array.isArray(parsedData)) {
-          for (i in parsedData) {
-            addEvent(parsedData[i]);
-          }
-        }
-        else {
+        // only add single messages, for now..
+        if (! Array.isArray(parsedData)) {
           addEvent(parsedData);
         }
 
+        window.scrollTo(0,document.body.scrollHeight);
       };
 
       function addEvent(message) {
         var eventList = document.getElementById("eventList");
         const newDiv = document.createElement("div");
+        newDiv.classList.add("list-item");
         newDiv.innerHTML = JSON.stringify(message);
 
         eventList.appendChild(newDiv);
