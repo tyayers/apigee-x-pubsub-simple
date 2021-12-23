@@ -20,13 +20,13 @@
       const events = new EventSource('/events');
 
       events.onmessage = (event) => {
-        const parsedData = JSON.parse(event.data);
+        const parsedData = event.data; //JSON.parse(event.data);
         console.log(event.data);
         
         // only add single messages, for now..
-        if (! Array.isArray(parsedData)) {
+        //if (! Array.isArray(parsedData)) {
           addEvent(parsedData);
-        }
+        //}
 
         window.scrollTo(0,document.body.scrollHeight);
       };

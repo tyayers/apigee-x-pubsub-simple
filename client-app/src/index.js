@@ -5,7 +5,8 @@ const path = require('path');
 const app = express()
 const port = 8080
 
-app.use(express.json()); //Used to parse JSON bodies
+app.use(express.text());
+app.use(express.json());
 app.use(morgan('combined'));
 app.use(express.static('public'));
 
@@ -13,13 +14,14 @@ let clients = [];
 const messages = [];
 
 app.post('/webhook', addMessage);
+app.post('/*', addMessage);
 
 function sendEventsToAll(newMessage) {
   clients.forEach(client => client.response.write(`data: ${JSON.stringify(newMessage)}\n\n`))
 }
 
 async function addMessage(request, respsonse, next) {
-  const newMessage = request.body.message;
+  const newMessage = request.body;
   messages.push(newMessage);
   respsonse.send("OK");
   return sendEventsToAll(newMessage);
